@@ -46,7 +46,7 @@ public class Parser {
             map.put(key, value);
         }
         now = LocalDateTime.now();
-        map.put("timeStamp", dtf.format(now));
+        map.put("timeStamp", dtf.format(now).replace(",", " "));
         return map;
     }
 

@@ -31,6 +31,9 @@ public class Writer {
     public void write(String filepath) {
         try {
 
+            File dataFile = new File(filepath);
+            if (!dataFile.exists()) dataFile.createNewFile();
+
             String previousLines = read(filepath);
 
             if (previousLines.length() == 0) {
@@ -38,8 +41,8 @@ public class Writer {
             } else {
                 previousLines += data;
             }
-//
-            BufferedWriter writer = new BufferedWriter(new FileWriter(new File(filepath)));
+
+            BufferedWriter writer = new BufferedWriter(new FileWriter(dataFile));
             writer.write(previousLines);
             writer.close();
 
