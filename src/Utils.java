@@ -4,7 +4,7 @@ import java.util.HashMap;
 public class Utils {
 
     public static final int BUFFER_SECONDS = 10;
-    public static final int DURATION_SECONDS = 60;
+    public static final int DURATION_SECONDS = 60 * 5;
 
     public static void collect(String ticker) {
         ArrayList<HashMap<String, String>> historicalData = new ArrayList<>();
