@@ -3,12 +3,9 @@ import java.util.HashMap;
 
 public class Main {
 
-    private static final String[] trackedTicker = {"AAPL", "MSFT", "GOOG"};
-
     //minutely data collection
-    public static void main(String[] args) throws InterruptedException {
-        for (String ticker : trackedTicker) {
-            new Thread(() -> Utils.collect(ticker)).start();
-        }
+    public static void main(String[] args) {
+        new TimedExecutor();
+        System.out.println("TICKER SCHEDULE schedule set for SE OPEN TIME LA, CA");
     }
 }

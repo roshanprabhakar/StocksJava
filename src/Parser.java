@@ -43,7 +43,7 @@ public class Parser {
                 value = input.substring(i + 1, nextSplice);
 //                System.out.println(value);
             }
-            map.put(key, value);
+            map.put(key, value.replace(",", " "));
         }
         now = LocalDateTime.now();
         map.put("timeStamp", dtf.format(now).replace(",", " "));
