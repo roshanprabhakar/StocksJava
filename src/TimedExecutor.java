@@ -4,13 +4,21 @@ import java.util.TimerTask;
 
 public class TimedExecutor {
 
-    private Timer timer;
+    private Timer executorTimer;
+    private Timer stockTimer;
 
     public TimedExecutor() {
-        Date startDate = new Date(Utils.START_MILLISECONDS);
+        executorTimer = new Timer();
+        executorTimer.schedule(new ScriptExecutor(), new Date(Utils.INITIALIZATION));
+    }
 
-        timer = new Timer();
-        timer.schedule(new StockTask(), startDate, Utils.DURATION_SECONDS + 60);
+    class ScriptExecutor extends TimerTask {
+        public void run() {
+            stockTimer = new Timer();
+            stockTimer.schedule(new StockTask(), Utils.DELAY_SECONDS, Utils.DURATION_SECONDS);
+            //delay is the time between every close and open, period is duration of market open
+            executorTimer.cancel();
+        }
     }
 
     class StockTask extends TimerTask {
@@ -18,7 +26,7 @@ public class TimedExecutor {
             for (String ticker : Utils.trackedTicker) {
                 new Thread(() -> Utils.collect(ticker)).start();
             }
-            timer.cancel();
+            stockTimer.cancel();
         }
     }
 }
